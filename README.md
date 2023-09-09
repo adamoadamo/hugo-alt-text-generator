@@ -32,7 +32,7 @@ The workflow executes the following steps:
 7. **Push changes**: Pushes the changes back to the master branch, if there are any commits.
 
 ## Python Script
-
+ 
 The Python script, stored at `./assets/scripts/alt-text.py`, performs the following actions:
 
 - Retrieves the necessary environment variables (`ACCOUNT_REGION`, `ACCOUNT_KEY`) and initializes the Computer Vision Client using the Azure SDK.
