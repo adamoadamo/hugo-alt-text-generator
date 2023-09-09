@@ -55,5 +55,7 @@ This project is open-source and available under the [MIT License](LICENSE).
 ## Acknowledgements
 
 - Azure Computer Vision API
+   - [Azure Cognitive Services Computer Vision SDK for Python
+](https://azuresdkdocs.blob.core.windows.net/$web/python/azure-cognitiveservices-vision-computervision/0.9.0/index.html)
 - Hugo
 - GitHub Actions
