@@ -29,7 +29,7 @@ jobs:
           pip install --upgrade azure-cognitiveservices-vision-computervision
 
       - name: Run Python Script
-        run: python ./assets/scripts/alt.py
+        run: python ./assets/scripts/alt-text.py
 
       # Add changes to git index
       - name: Add changes to git
