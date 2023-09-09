@@ -1,0 +1,48 @@
+name: Alt Text Generator
+
+on: 
+  workflow_dispatch
+
+env:
+  VISION_ENDPOINT: ${{ secrets.VISION_ENDPOINT }}
+  ACCOUNT_REGION: ${{ secrets.AZURE_ACCOUNT_REGION }}
+  ACCOUNT_KEY: ${{ secrets.AZURE_ACCOUNT_KEY }}
+
+jobs:
+  run-python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }} # Use your personal access token to checkout
+          ref: refs/heads/master
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with: 
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install toml requests
+          pip install --upgrade azure-cognitiveservices-vision-computervision
+
+      - name: Run Python Script
+        run: python ./assets/scripts/alt.py
+
+      # Add changes to git index
+      - name: Add changes to git
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'github-action@github.com'
+          git add content/work/*
+      
+      # Commit the changes with a generic message. Only commit if there are changes to commit
+      - name: Commit changes
+        run: git commit -m "Update alt text descriptions" || echo "No changes to commit"
+
+      # Push the changes back to your repository. Only push if there was a commit in the previous step
+      - name: Push changes
+        run: git push origin master || echo "No changes to push"
+
